@@ -23,6 +23,13 @@ public class Main {
                 correct = false;
             }
         }
+        for(int k = 0; k<3;k++) {
+            for(int j = 0; j<3;j++) {
+                if(!BoxChecker(k*3, j*3)) {
+                    correct = false;
+                }
+            }
+        }
 
         System.out.println(correct);
 
@@ -49,7 +56,23 @@ public class Main {
         }
         return true;
     }
-    public static boolean BoxChecker(int[][] board) { //this code will check if a value is repeated on a box
+    public static boolean BoxChecker(int row, int col) { //this code will check if a value is repeated on a box
+        ArrayList<Integer> tempBox = new ArrayList<>();
+
+        row = row - (row % 3);
+        col = col - (col % 3);
+
+        for(int i = 0; i<3;i++) {
+            for(int j = 0; j<3;j++) {
+                if(!tempBox.contains(sudoku[row][col])) {
+                    tempBox.add(sudoku[row][col]);
+                }
+                else{return false;}
+                col++;
+            }
+            col-=3;
+            row++;
+        }
 
         return true;
     }
